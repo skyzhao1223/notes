@@ -23,8 +23,25 @@
 
 ### CommonJS - Node.js
 
-原ServerJS。同步加载模块，适用于服务端。输出值拷贝。
+原ServerJS。同步加载模块，适用于服务端。
 
+- 输出值拷贝。
+- 输出定义在module.default上，是个对象。
+- 运行时加载（对象在脚本运行完生成）。
+- this指向当前模块。
+```js
+// a.js
+module.exports = {
+  foo: 'hello',
+  bar: 'world'
+};
+
+// 等同于
+export default {
+  foo: 'hello',
+  bar: 'world'
+};
+```
 ### AMD - require.js
 
 依赖前置、提前执行。
@@ -35,7 +52,11 @@
 
 ### ES6 Module
 
-在语言标准的层面上，实现的模块功能。输出值引用。
+在语言标准的层面上实现的模块功能。
+
+- 输出值引用（符号连接），不能赋值。
+- 编译时输出接口，在代码解析阶段生成。
+- this指向undefined，不是对象。
 
 ### AMD、CMD转换为CommonJS（同步模块）
 
